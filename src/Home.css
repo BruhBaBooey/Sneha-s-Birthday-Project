@@ -1,0 +1,284 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* prevents horizontal scroll bar */
+}
+
+/* Countdown bar */
+.countdown-top {
+  position: relative; /* default */
+  width: 100%;
+  background: #3c0a32;
+  padding: 18px 0;
+  color: #ffafe1;
+  text-align: center;
+  font-weight: 900;
+  font-size: 1.6rem;
+  letter-spacing: 0.12em;
+  box-shadow: 0 0 40px #ff6aacaa inset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  z-index: 100;
+  user-select: none;
+  flex-wrap: wrap;
+}
+
+
+.countdown-label {
+  flex: 1 1 100%;
+  font-size: 2.2rem;
+  color: #ffe1f4;
+  margin-bottom: 4px;
+  z-index: 1;
+}
+
+.countdown-timer {
+  font-family: monospace;
+  font-size: 2.2rem;
+  color: white;
+  text-shadow: 0 0 6px #ff54a0cc;
+  flex: 0 1 auto;
+  z-index: 1;
+}
+
+.countdown-timer span {
+  padding: 0 14px;
+  user-select: text;
+}
+
+/* Container */
+.app-container {
+  /* Remove min-height and padding-top */
+  min-height: auto;
+  padding-top: 0;
+  margin-top: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-left: 2rem;
+  padding-right: 2rem;
+
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Music toggle */
+.music-toggle {
+  display: flex;
+  align-items: center;   /* vertical center */
+  justify-content: center; /* horizontal center */
+  position: absolute;
+  top: 20px;      /* distance from the top */
+  right: 40px;    /* distance from the right */
+  background: linear-gradient(135deg, #ff5ca1, #ff398a);
+  color: white;
+  font-weight: 700;
+  font-size: 2.5rem;
+  border: none;
+  border-radius: 30px;
+  padding: 0.7px 2px 6px 2px;
+  cursor: pointer;
+  box-shadow: 0 0 20px #ff2f8ac0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  flex-shrink: 0;
+  user-select: none;
+  z-index: 9999;
+}
+
+.music-toggle:hover, 
+.music-toggle:focus {
+  outline: none;
+  box-shadow: 0 0 40px #ff397fcc;
+  transform: scale(1.1);
+}
+
+.music-toggle:active {
+  transform: scale(0.95);
+  box-shadow: 0 0 30px #ff2f8ac0;
+}
+
+/* Button */
+.magic-button {
+  font-size: 0;
+  font-weight: 900;
+  background: linear-gradient(135deg, #ff5ca1, #ff1a8c);
+  border: none;
+  border-radius: 30px;
+  padding: 16px;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: none;
+  transition: box-shadow 0.3s ease, transform 0.4s ease;
+  user-select: none;
+  background-size: 400% auto;
+  position: relative;
+  top: 110px;
+}
+
+.gift-icon {
+  width: 118px;
+  height: 118px;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+.magic-button:hover, .magic-button:focus {
+  box-shadow:
+    0 0 25px #ff5ca1aa,
+    0 0 30px #fa2b7aee;
+  outline: none;
+  transform: scale(1.1);
+  animation: shimmer 3s infinite ease-in-out;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Countdown Locked */
+
+.warning {
+  margin-top: 135px; 
+  font-size: 1.3rem; 
+  color: #ff5aa9;
+}
+
+/* Confetti */
+.confetti-wrapper {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 750;
+  user-select: none;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 3px;
+  opacity: 0.85;
+  animation-name: confettiFall;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  transform: translateY(-50vh) rotate(0deg);
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-50vh) rotate(0deg);  /* start 50vh above the viewport */
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(120vh) rotate(720deg); /* fall well past bottom */
+    opacity: 0;
+  }
+}
+
+/* Balloons */
+.balloons-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.balloon-float {
+  position: absolute;
+  bottom: -150px;
+  animation: floatUp 60s linear infinite;
+}
+
+@keyframes floatUp {
+  0% {
+    bottom: -100px;
+    opacity: 0.4;
+    transform: translateY(0);
+  }
+  100% {
+    bottom: 110vh; /* or 100% or more */
+    opacity: 0.4;
+    transform: translateY(-100vh);
+  }
+}
+
+.balloon {
+  position: relative;
+  border-radius: 50%;
+  margin: 0 auto;
+  box-shadow: inset -4px -8px 10px rgba(0, 0, 0, 0.2);
+}
+
+.tail {
+  position: absolute;
+  bottom: -65px;
+  left: 50%;
+  width: 3px;
+  height: 65px;
+  background: black;
+  transform: translateX(-50%);
+  background: repeating-linear-gradient(
+    0deg,
+    black,
+    black 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  animation: swayTail 4s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+@keyframes swayTail {
+  0%   { transform: translateX(-50%) rotate(-15deg); }
+  50%  { transform: translateX(-50%) rotate(15deg); }
+  100% { transform: translateX(-50%) rotate(-15deg); }
+}
+
+/* Sparkles */
+.sparkles-wrapper {
+  position: fixed;
+  pointer-events: none;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  overflow: visible;
+  z-index: 1;
+}
+
+.sparkle {
+  position: fixed;
+  background: #ffc0d8;
+  border-radius: 50%;
+  box-shadow: 0 0 18px 5px #ff73b1cc;
+  animation-name: sparkleTwinkle;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+  filter: blur(0.6px);
+}
+
+.sparkle-animate {
+  animation-duration: 1.8s;
+}
+
+@keyframes sparkleTwinkle {
+  0% {
+    transform: scale(0.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}

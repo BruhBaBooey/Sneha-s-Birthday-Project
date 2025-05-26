@@ -1,0 +1,117 @@
+/* Birthday text */
+.main-title {
+  font-size: 3.6rem;
+  font-weight: 900;
+  color: #ff5aa9;
+  margin-top: 20px;
+  margin-bottom: 1.5rem;
+  user-select:none;
+  z-index: 1;
+}
+
+.glow-text {
+  color: #ff5aa9;
+  text-shadow:
+    0 0 0px #ff4fa1,
+    0 0 70px #ff4fa1,
+    0 0 100px #e01174;
+  user-select:none;
+}
+
+.poem {
+  display: inline-block;
+  text-align: center;
+  vertical-align: top;
+  max-width: 600px;
+  z-index: 1;
+  margin-bottom: -20px;
+}
+
+.poem p {
+  font-size: 1.25rem;
+  margin: 10px 0;
+  font-weight: 700;
+  user-select: none;
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeInUp 0.8s forwards ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* About Sneha panel */
+.sneha-photo {
+  display: flex;
+  justify-content: center; /* horizontal center */
+  align-items: center;
+  height: 530px;
+  margin-right: -450px;
+  margin-left: -40px;
+  left: 70%;
+  transform: translateX(-50%);
+  background: rgba(255 192 203 / 0.9);
+  border-radius: 24px;
+  box-shadow: 0 0 30px #ff5ca1aa;
+  padding: 11px ;
+  color: #490039; 
+  font-weight: 700;
+  text-align: center;
+  font-size: 1.1rem;
+  animation: fadeInUp 1.2s ease forwards;
+  user-select: none;
+  z-index: 850;
+}
+
+.about-section {
+  gap: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 2rem;
+  max-width: 100%;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.continue-button {
+  position: absolute;       /* Fix it relative to viewport */
+  bottom: 40px;          /* 20px from bottom */
+  right: 163px;           /* 20px from right */
+  padding: 12px 20px;
+  margin-bottom: -20px;
+  font-size: 1.1rem;
+  background: linear-gradient(-135deg, #ff398a);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(255, 105, 180, 0.5);
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1000;         /* make sure it’s on top */
+}
+
+.continue-button:hover,
+.continue-button:focus {
+  background-color: #ff85c1;
+  box-shadow: 0 6px 12px rgba(255, 105, 180, 0.8);
+  outline: none;
+}

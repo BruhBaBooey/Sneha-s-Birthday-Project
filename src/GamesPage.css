@@ -1,0 +1,82 @@
+/* Games Page Layout */
+.games-page {
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e0033, #440066);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  padding: 0px;
+  overflow-x: hidden;
+}
+
+.games-title {
+  font-size: 4rem;
+  margin-bottom: 30px;
+  margin-top: -60px;
+}
+
+/* Buttons */
+.games-button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 2;
+}
+
+.game-button {
+  background: linear-gradient(135deg, #ff5ca1, #ff1a8c);
+  color: white;
+  padding: 7px 30px;
+  border: none;
+  border-radius: 50px;
+  font-size: 2rem;
+  font-family: "Comic Sans MS";
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 15px #ff5ca1aa;
+}
+
+.game-button:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 25px #ff5ca1cc, 0 0 30px #fa2b7aee;
+}
+
+/* Fixed-position Controllers */
+.controller {
+  position: absolute;
+  width: 370px;
+  height: 370px;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 0 12px #ff1a8caa);
+  animation-duration: 2.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+.controller-left-fixed {
+  left: 100px;
+  top: 50%;
+  animation-name: sway-left;
+}
+
+.controller-right-fixed {
+  right: 100px;
+  top: 50%;
+  animation-name: sway-right;
+}
+
+@keyframes sway-left {
+  0%, 100% { transform: translateY(-50%) rotate(35deg); }
+  50% { transform: translateY(-55%) rotate(-30deg); }
+}
+
+@keyframes sway-right {
+  0%, 100% { transform: translateY(-50%) rotate(-35deg); }
+  50% { transform: translateY(-55%) rotate(30deg); }
+}

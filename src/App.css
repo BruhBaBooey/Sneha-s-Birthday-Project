@@ -1,0 +1,11 @@
+/* Make sure html and body fill the viewport and get the gradient background */
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #1e0033, #341947, #4a325b);
+  color: white; /* optional, to keep text readable across app */
+  overflow-x: hidden; /* avoid horizontal scrollbar */
+  font-family: sans-serif; /* optional */
+}
