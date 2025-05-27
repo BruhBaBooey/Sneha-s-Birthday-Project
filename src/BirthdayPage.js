@@ -20,7 +20,7 @@ export default function BirthdayPage({ setVolume }  ) {
     }, []);
 
     useEffect(() => {
-        const target = new Date('2025-05-25T00:00:00');
+        const target = new Date('2025-05-28T00:00:00');
         const timerId = setInterval(() => {
           const now = new Date();
           const diff = target - now;
