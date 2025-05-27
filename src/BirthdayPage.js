@@ -1,19 +1,23 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import photo from './assets/sneha.jpg';
-import bgMusic from './assets/Taylor Swift - Style.mp3';
 import './BirthdayPage.css'
 import './Home.css'
 import { useNavigate } from 'react-router-dom';
 
-export default function BirthdayPage() {
+export default function BirthdayPage({ setVolume }  ) {
     const [balloons, setBalloons] = useState([]);
-    const [musicPlaying, setMusicPlaying] = useState(false);
+    const [, setMusicPlaying] = useState(false);
     const confettiRef = useRef(null);
     const sparklesRef = useRef(null);
     const audioRef = useRef(null);
-    const [timeLeft, setTimeLeft] = useState({ days:'--', hours:'--', minutes:'--', seconds:'--' });
+    const [timeLeft, setTimeLeft] = useState({ days:'00', hours:'00', minutes:'00', seconds:'00' });
     const [, setCountdownOver] = useState(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        localStorage.removeItem('puzzleSolved');
+        localStorage.removeItem('riddleSolved');
+    }, []);
 
     useEffect(() => {
         const target = new Date('2025-05-25T00:00:00');
@@ -42,7 +46,7 @@ export default function BirthdayPage() {
         const colors = ['#FF9AD3','#FFA1A1','#FFB2E9', '#FDB9DB', '#FF6D91'];
         const container = confettiRef.current;
         container.innerHTML = '';
-        for(let i=0; i<600; i++){
+        for(let i=0; i<300; i++){
         const div = document.createElement('div');
         div.className = 'confetti-piece';
         div.style.backgroundColor = colors[i % colors.length];
@@ -61,7 +65,7 @@ export default function BirthdayPage() {
     // Balloons launch
     const launchBalloons = () => {
         const colors = ['#FF69B4', '#FFD700', '#87CEFA', '#FFA07A', '#98FB98'];
-        const newBalloons = Array.from({ length: 50 }, (_, i) => ({
+        const newBalloons = Array.from({ length: 25 }, (_, i) => ({
         id: i,
         color: colors[Math.floor(Math.random() * colors.length)],
         left: Math.random() * 100,
@@ -93,29 +97,17 @@ export default function BirthdayPage() {
     };
 
     useEffect(() => {
-        launchConfetti();
-        launchBalloons();
-        launchSparkles();
-        if(audioRef.current){
-        audioRef.current.volume = 0.6;
+    launchConfetti();
+    launchBalloons();
+    launchSparkles();
+    setVolume(0.5); // this controls volume globally
+    if(audioRef.current){
+        audioRef.current.currentTime = 0; // Ensure it restarts
+        audioRef.current.volume = 0.5;
         audioRef.current.play().catch(err => console.warn('Audio play failed:', err));
         setMusicPlaying(true);
-        }
-    }, []);
-
-    const toggleMusic = () => {
-    if(!audioRef.current) return;
-    if(musicPlaying){
-        audioRef.current.pause();
-        setMusicPlaying(false);
-    } else {
-        audioRef.current.play();
-        setMusicPlaying(true);
     }
-    // Remove focus to allow hover animation again
-    document.activeElement.blur();
-    };
-
+    }, [setVolume]);
 
     return (
         <div>
@@ -124,9 +116,6 @@ export default function BirthdayPage() {
             <div className="countdown-timer">
             <span>{timeLeft.days}d</span> : <span>{timeLeft.hours}h</span> : <span>{timeLeft.minutes}m</span> : <span>{timeLeft.seconds}s</span>
             </div>
-            <button onClick={toggleMusic} className="music-toggle" aria-pressed={musicPlaying}>
-            {musicPlaying ? '🔊' : '🔇'}
-            </button>
         </div>
         <div className="app-container enhanced-bg">
             <div ref={confettiRef} className="confetti-wrapper" aria-hidden="true" />
@@ -170,12 +159,8 @@ export default function BirthdayPage() {
                 </div>
             </div>
             <button className="continue-button" onClick={() => navigate('/GamesPage')} aria-label="Go to games page">
-                Let's Continue
+                Continue
             </button>
-            <audio ref={audioRef} loop preload="auto">
-                <source src={bgMusic} type="audio/mpeg" />
-                Your browser does not support the audio element.
-            </audio>
         </div>
         </div>
     );

@@ -8,14 +8,13 @@ html, body {
 .countdown-top {
   position: relative; /* default */
   width: 100%;
-  background: #3c0a32;
+  background: linear-gradient (135deg, #3d0732 #faf4ff) ;
   padding: 18px 0;
   color: #ffafe1;
   text-align: center;
   font-weight: 900;
   font-size: 1.6rem;
   letter-spacing: 0.12em;
-  box-shadow: 0 0 40px #ff6aacaa inset;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -134,12 +133,6 @@ html, body {
     0 0 30px #fa2b7aee;
   outline: none;
   transform: scale(1.1);
-  animation: shimmer 3s infinite ease-in-out;
-}
-
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
 }
 
 /* Countdown Locked */

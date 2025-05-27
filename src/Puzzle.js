@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
 import './PuzzleGame.css';
 import puzzleImage from './assets/puzzle-image.png';
+import { useNavigate } from 'react-router-dom';
 
 const pieceCount = 3;
 const totalPieces = pieceCount * pieceCount;
@@ -18,6 +19,7 @@ export default function Puzzle() {
     const [board, setBoard] = useState(Array(totalPieces).fill(null));
     const [tray, setTray] = useState([]);
     const [isComplete, setIsComplete] = useState(false);
+    const navigate = useNavigate();
 
 useEffect(() => {
   // Put all pieces shuffled into the tray on mount
@@ -31,6 +33,7 @@ useEffect(() => {
     const correct = board.every((piece, idx) => piece === idx);
     if (correct && !isComplete) {
       setIsComplete(true);
+      localStorage.setItem('puzzleSolved', 'true');
       launchConfetti();
     }
   };
@@ -149,7 +152,16 @@ useEffect(() => {
         ))}
       </div>
 
-      {isComplete && <p className="completion-message">🎉 Puzzle Complete!</p>}
+      {isComplete && (
+      <>
+        <p className="completion-message">🎉 Puzzle Complete!</p>
+        <button
+          className="continue-button"
+          onClick={() => navigate('/GamesPage')} // change route as needed
+        >
+          Continue
+        </button>
+      </>
+      )}
     </div>
-  );
-}
+  )}

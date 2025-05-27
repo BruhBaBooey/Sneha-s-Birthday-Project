@@ -1,0 +1,47 @@
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 20px;
+}
+
+.card {
+  background: rgba(255 192 203 / 0.9);
+  border-radius: 25px;
+  box-shadow: 0 10px 25px rgba(255, 105, 180, 0.3);
+  padding: 20px;
+  margin-top: 10px;
+  max-width: 700px;
+  text-align: center;
+  animation: fadeIn 1.5s ease;
+}
+
+.card-title {
+  font-family: 'Comic Sans', cursive;
+  color: #d63384;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 3px rgba(214, 51, 132, 0.3);
+}
+
+.card-message {
+  font-size: 1.1rem;
+  color: #4b006e;
+  margin-bottom: 20px;
+  line-height: 1.7;
+  font-family: 'Georgia', serif;
+}
+
+.card-signoff {
+  font-size: 1.2rem;
+  color: #b30059;
+  margin-top: 30px;
+  font-weight: bold;
+  font-family: 'Georgia', serif;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

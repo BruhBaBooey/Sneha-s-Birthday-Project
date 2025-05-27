@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import './RiddleGame.css';
+import { useNavigate } from 'react-router-dom';
 
 const riddleData = {
   question: `In a house where secrets sleep,  
-A haunting silence starts to creep.  
-Two seekers of truth take on the fear,  
-What name brings the darkness near?`,
-  answers: ["the conjuring" , "conjuring"],
+  A haunting silence starts to creep.  
+  Two seekers of truth take on the fear,  
+  What name brings the darkness near?`,
+  answers: ["the conjuring", "conjuring"],
   hints: [
     "It features real-life paranormal investigators Ed and Lorraine Warren.",
     "The title contains the word 'The.'",
@@ -18,15 +19,17 @@ export default function RiddleGame() {
   const [input, setInput] = useState('');
   const [feedback, setFeedback] = useState('');
   const [shownHints, setShownHints] = useState(0);
+  const navigate = useNavigate();
 
   const checkAnswer = () => {
-  const userInput = input.trim().toLowerCase();
-  if (riddleData.answers.includes(userInput)) {
-    setFeedback('🎉 Correct! Well done!');
-  } else {
-    setFeedback('❌ Try again!');
-  }
-};
+    const userInput = input.trim().toLowerCase();
+    if (riddleData.answers.includes(userInput)) {
+      setFeedback('🎉 Correct! Well done!');
+      localStorage.setItem('riddleSolved', 'true');
+    } else {
+      setFeedback('❌ Try again!');
+    }
+  };
 
   const revealHint = () => {
     if (shownHints < riddleData.hints.length) {
@@ -48,21 +51,31 @@ export default function RiddleGame() {
       />
 
       <div className="riddle-actions">
-        <button onClick={checkAnswer} className="riddle-submit">Submit</button>
-        {shownHints < riddleData.hints.length && (
+        <button 
+          onClick={checkAnswer} 
+          className="riddle-submit"
+          >
+            Submit
+          </button>
+          {shownHints < riddleData.hints.length && (
           <button
-          onClick={revealHint}
-          className="riddle-hint"
-          disabled={shownHints >= riddleData.hints.length}
-          aria-label={`Need a hint, ${riddleData.hints.length - shownHints} left`}
-          >Need a Hint? {riddleData.hints.length - shownHints} left
-        </button>
-
-        )}
+              onClick={revealHint}
+              className="riddle-hint"
+              disabled={shownHints >= riddleData.hints.length}
+              aria-label={`Need a hint, ${riddleData.hints.length - shownHints} left`}
+            >
+              Need a Hint? {riddleData.hints.length - shownHints} left
+            </button>
+          )}
+          {feedback === '🎉 Correct! Well done!' && (
+            <button 
+            className="continue-button" 
+            onClick={() => navigate('/GamesPage')}>
+              Continue
+            </button>
+          )}
       </div>
-
       {feedback && <p className="riddle-feedback">{feedback}</p>}
-
       <ul className="riddle-hints">
         {riddleData.hints.slice(0, shownHints).map((hint, index) => (
           <li key={index} className="riddle-hint-item">💡 {hint}</li>
